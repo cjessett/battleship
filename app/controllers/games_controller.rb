@@ -1,11 +1,25 @@
 class GamesController < ApplicationController
-  def new
-    @game = Game.new
-    session[:game] = @game
+  before_action :set_game, only: [:show, :update]
+
+  def create
+    game = Game.new
+    session[:game] = game
+    redirect_to gamepage_path
+  end
+
+  def show
+    @game
   end
 
   def update
+    if @game.shoot(params[:coordinates])
+      redirect_to game_path
+    end
+  end
+
+  private
+
+  def set_game
     @game = session[:game]
-    @game.shoot[params[:coordinates]]
   end
 end

@@ -5,4 +5,11 @@ class Boat < BasicBattleship
   def initialize
     super(SIZE, NAME)
   end
+
+  # Decreases health by 1
+  #
+  # @return [Integer] health
+  def hit
+    @health > 0 ? @health -= 1 : @health
+  end
 end

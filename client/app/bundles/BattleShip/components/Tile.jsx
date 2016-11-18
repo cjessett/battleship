@@ -1,9 +1,9 @@
 import React from 'react';
-import axios from 'axios';
 
 export default class Tile extends React.Component {
   handleClick = () => {
-    this.props.handleShoot(this.props.id)
+    const { coordinates, status, handleShot } = this.props;
+    if (status === "hidden") { handleShot(coordinates); }
   }
   render() {
     return (

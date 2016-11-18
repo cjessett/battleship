@@ -11,7 +11,7 @@ class Tile
   #
   # @return [Boolean] whether or not a boat is on the Tile
   def occupied?
-    !@boat.nil?
+    !!@boat
   end
 
   # Hits the boat on the Tile if there is one, and sets @hit to true
