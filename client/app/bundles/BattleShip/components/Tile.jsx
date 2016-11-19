@@ -3,7 +3,7 @@ import React from 'react';
 export default class Tile extends React.Component {
   handleClick = () => {
     const { coordinates, status, handleShot } = this.props;
-    if (status === "hidden") { handleShot(coordinates); }
+    if (status === 'hidden') { handleShot(coordinates); }
   }
   render() {
     return (

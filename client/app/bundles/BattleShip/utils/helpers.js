@@ -9,11 +9,8 @@ const client = axios.create({
 });
 
 const helpers = {
-  getStatus: () => {
-    return client.get('/game').then((r) => r.data.game);
-  },
   shoot: (coordinates) => {
-    return client.put('/game', { coordinates: coordinates }).then((r) => r);
+    return client.put('/game', { coordinates: coordinates }).then((r) => r.data.game);
   },
 };
 
