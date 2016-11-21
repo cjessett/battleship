@@ -1,33 +1,41 @@
 class Game
-  STARTING_BOATS = 5
-  STARTING_SHIPS = 3
-  STARTING_CARRIERS = 2
-  STARTING_SHOTS = 50
+  attr_reader :board, :shots_remaining, :boats
 
-  attr_reader :board, :shots_remaining, :boats_remaining
-
-  def initialize(options = { starting_shots: STARTING_SHOTS })
-    @board = Board.new
-    @shots_remaining = options[:starting_shots]
-    @boats_remaining = Hash.new(0)
+  def initialize(boats: CONFIG['boats'],
+                 board_height: CONFIG['board_height'],
+                 board_width: CONFIG['board_width'],
+                 starting_shots: CONFIG['starting_shots'])
+    @board = Board.new(board_height, board_width)
+    @shots_remaining = starting_shots
+    @boats = boats
     board_setup
+  end
+
+  # Updates the tile at the provided coordinate in the board array to 'hit' it,
+  # and updates any needed game and boat statuses
+  #
+  # @param [Array] the x and y coordinates used to locate the Tile to 'hit'
+  def shoot(coordinates)
+    tile = tile_at(coordinates[0],coordinates[1])
+    tile.shoot
+    @shots_remaining -= 1 unless tile.occupied?
   end
 
   private
 
-  # Generates, randomly places, and creates a count hash of all boat pieces
+  # Generates and randomly places all boat pieces
   def board_setup
     create_boats.each do |boat|
-      @board.place_boat(boat, @board.random_boat_location(boat.size))
-      @boats_remaining[boat.name] += 1
+      board.place_boat(boat, @board.random_boat_location(boat.size))
     end
   end
 
+  # Dynamically create boat objects based on the names and quantities in @boats
   def create_boats
-    boats = []
-    STARTING_CARRIERS.times { boats << Carrier.new }
-    STARTING_SHIPS.times { boats << Ship.new }
-    STARTING_BOATS.times { boats << Boat.new }
-    boats
+    boats.map { |name, num| num.times.map { Object::const_get(name.to_s).new } }.flatten
+  end
+
+  def tile_at(row, column)
+    board.board[row][column]
   end
 end

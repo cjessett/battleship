@@ -13,4 +13,9 @@ class BasicBattleship
   def sunk?
     @health.zero?
   end
+
+  # Reduces the boat's health when it is hit
+  def hit
+    @health -= 1
+  end
 end

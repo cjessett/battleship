@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Board, type: :model do
-  subject(:board) { Board.new }
+  subject(:board) { Board.new(10, 10) }
 
   describe '#initialize' do
     it 'creates a 2-dimensional array of Tile objects' do

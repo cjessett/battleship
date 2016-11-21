@@ -1,0 +1,9 @@
+boats:
+  Carrier: 2
+  Ship: 3
+  Boat: 5
+
+starting_shots: 50
+
+board_height: 10
+board_width: 10
