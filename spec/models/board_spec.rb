@@ -13,11 +13,15 @@ RSpec.describe Board, type: :model do
   describe '#place_boat' do
     before do
       tiles = [Tile.new, Tile.new, Tile.new]
-      board.place_boat(Ship.new, tiles)
+      @ship = Ship.new
+      board.place_boat(@ship, tiles)
       @test_tile = tiles[0]
     end
     it 'places a boat on a given set of Tiles' do
-      expect(@test_tile.class).to eql(Tile)
+      expect(@test_tile.boat.class).to eql(Ship)
+    end
+    it 'populates the boats array with boat objects' do
+      expect(board.boats).to eql([@ship])
     end
   end
 end

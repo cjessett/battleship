@@ -16,7 +16,7 @@ class Game
   #
   # @param [Array] the x and y coordinates used to locate the Tile to 'hit'
   def shoot(coordinates)
-    tile = tile_at(coordinates[0],coordinates[1])
+    tile = tile_at(coordinates[0], coordinates[1])
     tile.shoot
     @shots_remaining -= 1 unless tile.occupied?
   end
@@ -26,7 +26,7 @@ class Game
   # Generates and randomly places all boat pieces
   def board_setup
     create_boats.each do |boat|
-      board.place_boat(boat, @board.random_boat_location(boat.size))
+      board.place_boat(boat, board.random_boat_location(boat.size))
     end
   end
 

@@ -1,4 +1,6 @@
 class Tile
+  STATUSES = { hit: 'hit', sunk: 'sunk', water: 'water', hidden: 'hidden' }
+
   attr_accessor :boat, :hit
 
   def initialize
@@ -16,5 +18,14 @@ class Tile
   def shoot
     @hit = true
     boat.hit if occupied?
+  end
+
+  # Identifies the Tile's current status
+  #
+  # @return [String] the Tile's current status
+  def status
+    return STATUSES[:hidden] unless hit
+    return STATUSES[:water] unless occupied?
+    boat.sunk? ? STATUSES[:sunk] : STATUSES[:hit]
   end
 end

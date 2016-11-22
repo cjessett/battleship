@@ -1,5 +1,6 @@
 class BasicBattleship
   attr_reader :size, :name
+  attr_accessor :health
 
   def initialize(size, name)
     @size = size
@@ -11,7 +12,7 @@ class BasicBattleship
   #
   # @return [Boolean] whether or not the Boat is sunk
   def sunk?
-    @health.zero?
+    health.zero?
   end
 
   # Reduces the boat's health when it is hit
