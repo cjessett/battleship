@@ -1,13 +1,15 @@
 class Game
-  attr_reader :board, :shots_remaining, :boats, :score
+  attr_reader :board, :shots_remaining, :boats, :starting_shots, :starting_time
 
   def initialize(boats: CONFIG['boats'],
                  board_height: CONFIG['board_height'],
                  board_width: CONFIG['board_width'],
                  starting_shots: CONFIG['starting_shots'])
     @board = Board.new(board_height, board_width)
+    @starting_shots = starting_shots
     @shots_remaining = starting_shots
     @boats = boats
+    @starting_time = Time.now
     board_setup
   end
 
@@ -19,6 +21,20 @@ class Game
     tile = tile_at(coordinates[0], coordinates[1])
     tile.shoot
     @shots_remaining -= 1 unless tile.occupied?
+  end
+
+  # Calculate the game score based on missed shots, hit shots, and elapsed time
+  #
+  # @return [Fixnum] the score of the game
+  def score
+    statuses = Tile::STATUSES
+    missed_shots = starting_shots - shots_remaining
+    hit_shots = board.board.flatten.select do |tile|
+      [statuses[:hit], statuses[:sunk]].include?(tile.status)
+    end
+    hit_shots = hit_shots.count
+    total_time = (Time.now - starting_time).round
+    ((500 * hit_shots) - (50 * missed_shots)) / total_time
   end
 
   private

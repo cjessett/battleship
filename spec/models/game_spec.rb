@@ -49,4 +49,25 @@ RSpec.describe Game, type: :model do
       expect(@game_without_boat.shots_remaining).to eql(49)
     end
   end
+
+  describe '#score' do
+    let(:score) do
+      seconds = 4
+      num_tiles = 5
+      time_now = Time.now + seconds
+      game = Game.new(boats: { Boat: 0,
+                               Ship: 0,
+                               Carrier: 0 },
+                      starting_shots: 50,
+                      board_height: 1,
+                      board_width: num_tiles)
+      allow(Time).to receive(:now).and_return(time_now)
+      num_tiles.times { |i| game.shoot([0, i]) }
+      @expected_score = -(50 * num_tiles)/seconds
+    end
+
+    it 'calculates the score for the game' do
+      expect(score).to eql(@expected_score)
+    end
+  end
 end
