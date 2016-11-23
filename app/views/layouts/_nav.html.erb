@@ -1,7 +1,12 @@
-<nav class="navbar navbar-light bg-faded">
-  <div class="nav navbar-nav">
-    <h1>
-    <%= link_to 'BattleShip', root_path, class:"nav-item nav-link" %>
-    </h1>
-  </div>
+<nav class="navbar navbar-light  bg-faded">
+  <h1 class="navbar-nav"><%= link_to 'BattleShip', root_path, class:"nav-item nav-link" %></h1>
+  <ul class="nav navbar-nav float-xs-right">
+  <% if user_signed_in? %>
+    <%= link_to current_user.email , edit_user_registration_path, class:'nav-item btn' %>
+    <%= link_to 'Logout', destroy_user_session_path, method: :delete, class:'nav-item btn btn-outline-primary' %>
+  <% else %>
+    <%= link_to 'Login', new_user_session_path, class:'nav-item btn btn-outline-primary' %>
+    <%= link_to 'Signup', new_user_registration_path, class:'nav-item btn btn-outline-primary' %>
+  <% end %>
+  </ul>
 </nav>
