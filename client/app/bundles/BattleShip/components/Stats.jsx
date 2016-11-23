@@ -14,10 +14,8 @@ export default class Stats extends React.Component {
         <h3>Boats Remaining</h3>
           {boatTypes}
         <h3>Elapsed Time</h3>
-          <Timer />
+          <Timer gameOver={this.props.gameOver}/>
       </div>
     );
   }
 }
-
-

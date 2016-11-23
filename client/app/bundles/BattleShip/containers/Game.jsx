@@ -37,7 +37,7 @@ export default class Game extends React.Component {
           <Board board={board} handleShot={this.handleShot} />
         </div>
         <div className="col-sm-3">
-          <Stats shots={shotsLeft} boats={boats} />
+          <Stats shots={shotsLeft} boats={boats} gameOver={gameOver} />
         </div>
         <Modal show={gameOver}>
           <Modal.Header>
@@ -54,19 +54,6 @@ export default class Game extends React.Component {
   }
 }
 
-buttonProps = signedIn ? {href: '/'} : {onClick: handleButtonClick}
-
-<Button buttonProps></Button>
-
-
-class MyButton extends React.Component {
-  state = {}
-  render() {
-    return (
-
-    )
-  }
-}
 
 
 

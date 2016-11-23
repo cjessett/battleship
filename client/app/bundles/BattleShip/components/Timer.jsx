@@ -22,7 +22,11 @@ export default class Timer extends React.Component {
     sec = sec < 10 ? `0${sec}` : `${sec}`
     return `${minutes}:${sec}`
   }
+  handleGameOver = () => {
+    clearInterval(this.timer)
+  }
   render() {
+    if (this.props.gameOver) { this.handleGameOver(); }
     return <span>{this.convert(this.state.time)}</span>
   }
 }

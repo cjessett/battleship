@@ -39,6 +39,13 @@ class Game
     ((500 * hit_shots) - (50 * missed_shots)) / total_time
   end
 
+  # Identifies if the game is over by determining if all shots or boats are gone
+  #
+  # @return [Boolean] whether or not the game is over
+  def game_over?
+    shots_remaining <= 0 || board.boats.all?(&:sunk?)
+  end
+
   private
 
   # Generates and randomly places all boat pieces

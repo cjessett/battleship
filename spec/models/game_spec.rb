@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Game, type: :model do
+  subject(:game) { Game.new }
+
   describe '#initialize' do
-    subject(:game) { Game.new }
     it 'places boats on the board' do
       carrier = Carrier.new
       ship = Ship.new
@@ -50,24 +51,42 @@ RSpec.describe Game, type: :model do
     end
   end
 
-  describe '#score' do
-    let(:score) do
-      seconds = 4
-      num_tiles = 5
-      time_now = Time.now + seconds
-      game = Game.new(boats: { Boat: 0,
-                               Ship: 0,
-                               Carrier: 0 },
-                      starting_shots: 50,
-                      board_height: 1,
-                      board_width: num_tiles)
-      allow(Time).to receive(:now).and_return(time_now)
-      num_tiles.times { |i| game.shoot([0, i]) }
-      @expected_score = -(50 * num_tiles)/seconds
+  describe '#game_over?' do
+    context 'when all boats have been sunk' do
+      let (:game_over) do
+        game = Game.new(boats: { Boat: 1,
+                                 Ship: 0,
+                                 Carrier: 0 },
+                        starting_shots: 50,
+                        board_height: 1,
+                        board_width: 1)
+        game.shoot([0, 0])
+        game.game_over?
+      end
+      it 'identifies that the game is over' do
+        expect(game_over).to be true
+      end
     end
 
-    it 'calculates the score for the game' do
-      expect(score).to eql(@expected_score)
+    context 'when all shots are gone' do
+      let (:game_over) do
+        game = Game.new(boats: { Boat: 1,
+                                 Ship: 0,
+                                 Carrier: 0 },
+                        starting_shots: 0,
+                        board_height: 1,
+                        board_width: 1)
+        game.game_over?
+      end
+      it 'identifies that the game is over' do
+        expect(game_over).to be true
+      end
+    end
+
+    context 'when there are still shots and boats remaining' do
+      it 'identifies that the game is not over' do
+        expect(game.game_over?).to be false
+      end
     end
   end
 end
