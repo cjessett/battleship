@@ -1,25 +1,17 @@
 import React from 'react';
-
-styles = {
-
-}
+import axios from 'axios';
 
 export default class Tile extends React.Component {
+  handleClick = () => {
+    this.props.handleShoot(this.props.id)
+  }
   render() {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-sm-4">
-            One of three columns
-          </div>
-          <div className="col-sm-4">
-            One of three columns
-          </div>
-          <div className="col-sm-4">
-            One of three columns
-          </div>
-        </div>
+      <div
+        className={`col-sm-1 offset-sm-1 tile ${this.props.status}`}
+        onClick={this.handleClick}
+      >
       </div>
-    )
+    );
   }
 }

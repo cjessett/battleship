@@ -1,0 +1,10 @@
+.tile {
+  margin: 3px;
+  width: 75px;
+  height: 75px;
+}
+
+.hit { background-color: red; }
+.sunk { background-color: black; }
+.water {  background-color: blue; }
+.hidden { background-color: gray; }

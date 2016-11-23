@@ -7,7 +7,20 @@
   },
   "scripts": {
     "postinstall": "cd client && npm install",
-    "rails-server": "echo 'visit http://localhost:3000/hello_world' && foreman start -f Procfile.dev",
-    "test": "rspec"
+    "rails-server": "echo 'visit http://localhost:3000' && foreman start -f Procfile.dev",
+    "test": "rspec",
+    "lint": "eslint 'client/app/**'"
+  },
+  "dependencies": {
+    "eslint": "^3.10.2"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.1.0",
+    "eslint": "^3.10.2",
+    "eslint-config-react-app": "^0.3.0",
+    "eslint-plugin-flowtype": "^2.25.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.7.1"
   }
 }
