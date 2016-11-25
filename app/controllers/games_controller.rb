@@ -6,6 +6,6 @@ class GamesController < ApplicationController
 
   def update
     @game = session[:game]
-    @game.shoot(params[:coordinates])
+    @game.shoot(params[:coordinates].map(&:to_i))
   end
 end

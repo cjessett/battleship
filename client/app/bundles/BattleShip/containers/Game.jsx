@@ -35,3 +35,20 @@ export default class Game extends React.Component {
     );
   }
 }
+
+buttonProps = signedIn ? {href: '/'} : {onClick: handleButtonClick}
+
+<Button buttonProps></Button>
+
+
+class MyButton extends React.Component {
+  state = {}
+  render() {
+    return (
+
+    )
+  }
+}
+
+
+

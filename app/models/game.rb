@@ -1,5 +1,5 @@
 class Game
-  attr_reader :board, :shots_remaining, :boats
+  attr_reader :board, :shots_remaining, :boats, :score
 
   def initialize(boats: CONFIG['boats'],
                  board_height: CONFIG['board_height'],
