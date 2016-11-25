@@ -1,6 +1,5 @@
 class Game
   attr_reader :board, :shots_remaining, :boats, :starting_shots, :starting_time
-  attr_accessor :score
 
   def initialize(boats: CONFIG['boats'],
                  board_height: CONFIG['board_height'],
@@ -11,7 +10,6 @@ class Game
     @shots_remaining = starting_shots
     @boats = boats
     @starting_time = Time.now
-    @score = 0
     board_setup
   end
 
@@ -37,6 +35,10 @@ class Game
     hit_shots = hit_shots.count
     total_time = (Time.now - starting_time).round
     ((500 * hit_shots) - (50 * missed_shots)) / total_time
+  end
+
+  def score
+    @score ||= calculate_score
   end
 
   # Identifies if the game is over by determining if all shots or boats are gone

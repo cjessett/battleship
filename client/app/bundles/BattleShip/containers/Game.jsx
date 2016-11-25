@@ -2,7 +2,7 @@ import React from 'react';
 import Board from '../components/Board';
 import Stats from '../components/Stats';
 import GameOverButton from '../components/GameOverButton';
-import { Modal } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 
 import client from '../utils/helpers';
 
@@ -44,10 +44,10 @@ export default class Game extends React.Component {
             <Modal.Title>
               You scored {score} points!
             </Modal.Title>
-            <Modal.Body>
-              <GameOverButton signedIn={signedIn} />
-            </Modal.Body>
           </Modal.Header>
+          <Modal.Body>
+            <GameOverButton signedIn={signedIn} loginPath={this.props.loginPath} />
+          </Modal.Body>
         </Modal>
       </div>
     );

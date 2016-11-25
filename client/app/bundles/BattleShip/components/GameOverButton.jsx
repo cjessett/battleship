@@ -2,14 +2,15 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 
 export default class GameOverButton extends React.Component {
-  handleClick = () => { $('form').submit }
+  handleClick = () => { $('form').submit() }
   render() {
+    let buttonProp, buttonContent
     if (this.props.signedIn) {
-      const buttonProp = { onClick: this.handleClick() };
-      const buttonContent = 'Leaderboard';
+      buttonProp = { onClick: this.handleClick() };
+      buttonContent = 'Leaderboard';
     } else {
-      const buttonProp = { href: this.props.LoginPath };
-      const buttonContent = 'Log In/Register To Save Score';
+      buttonProp = { href: this.props.loginPath };
+      buttonContent = 'Log In/Register To Save Score';
     }
     return <Button {...buttonProp}>{buttonContent}</Button>
   }
