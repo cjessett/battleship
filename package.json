@@ -2,8 +2,8 @@
   "name": "react-webpack-rails-tutorial",
   "version": "0.0.1",
   "engines": {
-    "node": "5.10.0",
-    "npm": "3.5.0"
+    "node": "6.7.0",
+    "npm": "3.10.3"
   },
   "scripts": {
     "postinstall": "cd client && npm install",
@@ -22,5 +22,9 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.7.1"
-  }
+  },
+  "cacheDirectories": [
+  "node_modules",
+  "client/node_modules"
+]
 }
