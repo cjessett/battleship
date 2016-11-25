@@ -3,3 +3,4 @@ json.initialBoats @game.board.boats.group_by(&:class).reduce({}){ |h, (k,v)| h[k
 json.initialShots @game.starting_shots
 json.signedIn user_signed_in?
 json.loginPath new_user_registration_path
+

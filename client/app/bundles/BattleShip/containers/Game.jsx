@@ -53,7 +53,3 @@ export default class Game extends React.Component {
     );
   }
 }
-
-
-
-
