@@ -1,5 +1,6 @@
 class Game
   attr_reader :board, :shots_remaining, :boats, :starting_shots, :starting_time
+  attr_accessor :score
 
   def initialize(boats: CONFIG['boats'],
                  board_height: CONFIG['board_height'],
@@ -10,6 +11,7 @@ class Game
     @shots_remaining = starting_shots
     @boats = boats
     @starting_time = Time.now
+    @score = 0
     board_setup
   end
 
@@ -26,7 +28,7 @@ class Game
   # Calculate the game score based on missed shots, hit shots, and elapsed time
   #
   # @return [Fixnum] the score of the game
-  def score
+  def calculate_score
     statuses = Tile::STATUSES
     missed_shots = starting_shots - shots_remaining
     hit_shots = board.board.flatten.select do |tile|
