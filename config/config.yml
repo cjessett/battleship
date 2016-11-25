@@ -3,7 +3,7 @@ boats:
   Ship: 3
   Boat: 5
 
-starting_shots: 50
+starting_shots: 5
 
 board_height: 10
 board_width: 10
